@@ -22,10 +22,4 @@
     <ProjectReference Include="..\TestAudisoft.Domain\TestAudisoft.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Grades\Dtos\" />
-    <Folder Include="Professor\Dtos\" />
-    <Folder Include="Student\Dtos\" />
-  </ItemGroup>
-
 </Project>
