@@ -1,0 +1,45 @@
+version: '3.9'
+
+services:
+  testaudisoft_api:
+    container_name: testaudisoft-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8080"
+    depends_on:
+      testaudisoft_postgres:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__DefaultConnection: Host=testaudisoft_postgres;Port=5432;Database=TestAudisoftDb;Username=admin;Password=1234
+    networks:
+      - testaudisoft-network
+
+  testaudisoft_postgres:
+    container_name: testaudisoft-postgres
+    image: postgres:16
+    restart: always
+    environment:
+      POSTGRES_DB: TestAudisoftDb
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 1234
+    ports:
+      - "5433:5432"
+    volumes:
+      - testaudisoft_postgres_data:/var/lib/postgresql/data
+    networks:
+      - testaudisoft-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d TestAudisoftDb"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+networks:
+  testaudisoft-network:
+
+volumes:
+  testaudisoft_postgres_data:

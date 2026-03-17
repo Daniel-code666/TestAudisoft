@@ -5,6 +5,27 @@ VisualStudioVersion = 17.14.37027.9 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAudisoft", "TestAudisoft\TestAudisoft.csproj", "{FC1B6EFD-A5BA-4F06-B13A-07F8282F44A1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAudisoft.Domain", "TestAudisoft.Domain\TestAudisoft.Domain.csproj", "{7B16E615-5FE5-4C9A-AC5F-B0D02CF3ED86}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAudisoft.Infrastructure", "TestAudisoft.Infrastructure\TestAudisoft.Infrastructure.csproj", "{A4E4713A-CDAF-4A00-85C4-0F16A89815BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAudisoft.Application", "TestAudisoft.Application\TestAudisoft.Application.csproj", "{1333AE5A-703B-481F-B458-A3D2FB302A4E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elementos de la solución", "Elementos de la solución", "{D107F4C8-89CC-BEA8-D3D7-CA6B7733353D}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yaml = docker-compose.yaml
+		Dockerfile = Dockerfile
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kubernetes", "Kubernetes", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+	ProjectSection(SolutionItems) = preProject
+		postgres-secret.yaml = postgres-secret.yaml
+		api-service.yaml = api-service.yaml
+		postgres-deployment.yaml = postgres-deployment.yaml
+		api-deployment.yaml = api-deployment.yaml
+		postgres-service.yaml = postgres-service.yaml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +36,18 @@ Global
 		{FC1B6EFD-A5BA-4F06-B13A-07F8282F44A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC1B6EFD-A5BA-4F06-B13A-07F8282F44A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC1B6EFD-A5BA-4F06-B13A-07F8282F44A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B16E615-5FE5-4C9A-AC5F-B0D02CF3ED86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B16E615-5FE5-4C9A-AC5F-B0D02CF3ED86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B16E615-5FE5-4C9A-AC5F-B0D02CF3ED86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B16E615-5FE5-4C9A-AC5F-B0D02CF3ED86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4E4713A-CDAF-4A00-85C4-0F16A89815BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4E4713A-CDAF-4A00-85C4-0F16A89815BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4E4713A-CDAF-4A00-85C4-0F16A89815BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4E4713A-CDAF-4A00-85C4-0F16A89815BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1333AE5A-703B-481F-B458-A3D2FB302A4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1333AE5A-703B-481F-B458-A3D2FB302A4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1333AE5A-703B-481F-B458-A3D2FB302A4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1333AE5A-703B-481F-B458-A3D2FB302A4E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
