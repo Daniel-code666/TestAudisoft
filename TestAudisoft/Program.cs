@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
+using TestAudisoft.Application;
+using TestAudisoft.Infrastructure;
 using TestAudisoft.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,7 +16,9 @@ builder.Services.AddControllers().AddJsonOptions(o =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<TestAudisoftDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<TestAudisoftDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")))
+    .AddApplication()
+    .AddInfrastructure();
 
 var app = builder.Build();
 
