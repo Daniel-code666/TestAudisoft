@@ -35,17 +35,29 @@ builder.Services.AddDbContext<TestAudisoftDbContext>(options => options.UseNpgsq
     .AddApplication()
     .AddInfrastructure();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AngularLocalhost4200", policy =>
+    {
+        policy.WithOrigins("http://localhost:4200")
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials();
+    });
+});
+
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
-{
-    var dbContext = scope.ServiceProvider.GetRequiredService<TestAudisoftDbContext>();
-    dbContext.Database.Migrate();
-}
+//using (var scope = app.Services.CreateScope())
+//{
+//    var dbContext = scope.ServiceProvider.GetRequiredService<TestAudisoftDbContext>();
+//    dbContext.Database.Migrate();
+//}
 
 // Configure the HTTP request pipeline.
 app.UseSwagger();
 app.UseSwaggerUI();
+app.UseCors("AngularLocalhost4200");
 
 app.UseExceptionMiddleware();
 
