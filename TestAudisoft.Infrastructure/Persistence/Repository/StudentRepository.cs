@@ -85,5 +85,8 @@ namespace TestAudisoft.Infrastructure.Persistence.Repository
 
             return rows_affected > 0 ? DbActions.Updated : DbActions.NotUpdated;
         }
+
+        async Task<StudentEntity?> IStudentRepository.GetByIdWithGrades(int student_id)
+            => await _context.Student.AsNoTracking().Include(x => x.Grades).FirstOrDefaultAsync(x => x.Id == student_id);
     }
 }

@@ -10,6 +10,7 @@ namespace TestAudisoft.Infrastructure
                 => services
                     .AddScoped<IStudentRepository, StudentRepository>()
                     .AddScoped<IProfessorRepository, ProfessorRepository>()
-                    .AddScoped<IGradesRepository, GradesRepository>();
+                    .AddScoped<IGradesRepository, GradesRepository>()
+                    .AddScoped<ICommonRepository, CommonRepository>();
     }
 }

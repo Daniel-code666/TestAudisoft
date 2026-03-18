@@ -11,5 +11,6 @@ namespace TestAudisoft.Application.Abstractions.Persistence
         Task<PagedResult<StudentEntity>> GetAll(StudentFilter filter);
         Task<StudentEntity?> GetById(int id);
         Task<DbActions> UpdateStudent(StudentEntity student);
+        Task<StudentEntity?> GetByIdWithGrades(int student_id);
     }
 }
