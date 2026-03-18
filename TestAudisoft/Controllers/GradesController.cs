@@ -25,7 +25,7 @@ namespace TestAudisoft.Controllers
         /// <returns></returns>
         [HttpGet]
         [ProducesResponseType(typeof(PagedResult<GradeDto>), StatusCodes.Status200OK)]
-        public async Task<ActionResult<PagedResult<GradeDto>>> GetAll([FromQuery] GradesFilter filter)
+        public async Task<ActionResult<PagedResult<GradeDto>>> GetAll([FromBody] GradesFilter filter)
         {
             PagedResult<GradeDto> result = await _gradesBusiness.GetAll(filter);
             return Ok(result);
