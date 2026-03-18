@@ -37,18 +37,15 @@ builder.Services.AddDbContext<TestAudisoftDbContext>(options => options.UseNpgsq
 
 var app = builder.Build();
 
-//using (var scope = app.Services.CreateScope())
-//{
-//    var dbContext = scope.ServiceProvider.GetRequiredService<TestAudisoftDbContext>();
-//    dbContext.Database.Migrate();
-//}
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<TestAudisoftDbContext>();
+    dbContext.Database.Migrate();
+}
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseExceptionMiddleware();
 
