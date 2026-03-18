@@ -23,7 +23,7 @@ namespace TestAudisoft.Controllers
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpPost]
         [ProducesResponseType(typeof(PagedResult<GradeDto>), StatusCodes.Status200OK)]
         public async Task<ActionResult<PagedResult<GradeDto>>> GetAll([FromBody] GradesFilter filter)
         {
