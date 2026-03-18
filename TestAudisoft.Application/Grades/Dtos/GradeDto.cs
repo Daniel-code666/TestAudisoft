@@ -6,7 +6,9 @@
         public string Name { get; set; } = string.Empty;
         public double GradeValue { get; set; }
         public int StudentId { get; set; }
+        public string StudentFullName { get; set; } = string.Empty;
         public int ProfessorId { get; set; }
+        public string ProfessorFullName { get; set; } = string.Empty;
     }
 
     public class GradeCreateDto

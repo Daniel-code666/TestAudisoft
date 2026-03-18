@@ -87,5 +87,15 @@ namespace TestAudisoft.Infrastructure.Persistence.Repository
 
         async Task<ProfessorEntity?> IProfessorRepository.GetByIdWithGrades(int professor_id)
             => await _context.Professor.AsNoTracking().Include(x => x.Grades).FirstOrDefaultAsync(x => x.Id == professor_id);
+
+        async Task<DbActions> IProfessorRepository.DeleteProfessor(int id)
+        {
+            ProfessorEntity? professor_db = await _context.Professor.FirstOrDefaultAsync(x => x.Id == id);
+            if (professor_db is null)
+                return DbActions.NotFound;
+            _context.Professor.Remove(professor_db);
+            int rows_affected = await _context.SaveChangesAsync();
+            return rows_affected > 0 ? DbActions.Deleted : DbActions.NotDeleted;
+        }
     }
 }

@@ -12,5 +12,6 @@ namespace TestAudisoft.Application.Student.UseCases.StudentBusiness
         Task<DbActions> CreateStudent(StudentCreateDto student);
         Task<DbActions> UpdateStudent(StudentUpdateDto student);
         Task<StudentWithGradesDto?> GetStudentWithGrades(int student_id);
+        Task<DbActions> DeleteStudent(int id);
     }
 }

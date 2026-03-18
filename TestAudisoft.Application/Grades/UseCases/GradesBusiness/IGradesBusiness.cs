@@ -13,5 +13,6 @@ namespace TestAudisoft.Application.Grades.UseCases.GradesBusiness
         Task<DbActions> UpdateGrades(GradeUpdateDto grades);
         Task<IEnumerable<GradeDto>> GetByStudentId(int student_id);
         Task<IEnumerable<GradeDto>> GetByProfessorId(int professor_id);
+        Task<DbActions> DeleteGrades(int id);
     }
 }

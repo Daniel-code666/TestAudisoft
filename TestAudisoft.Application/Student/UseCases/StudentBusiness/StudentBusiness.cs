@@ -12,13 +12,15 @@ namespace TestAudisoft.Application.Student.UseCases.StudentBusiness
     {
         private readonly IStudentRepository _studentRepository;
         private readonly ICommonRepository _commonRepository;
+        private readonly IGradesRepository _gradesRepository;
         private readonly IMapper _mapper;
 
-        public StudentBusiness(IMapper mapper, IStudentRepository studentRepository, ICommonRepository commonRepository)
+        public StudentBusiness(IMapper mapper, IStudentRepository studentRepository, ICommonRepository commonRepository, IGradesRepository gradesRepository)
         {
             _mapper = mapper;
             _studentRepository = studentRepository;
             _commonRepository = commonRepository;
+            _gradesRepository = gradesRepository;
         }
 
         async Task<PagedResult<StudentDto>> IStudentBusiness.GetAll(StudentFilter filter)
@@ -75,6 +77,21 @@ namespace TestAudisoft.Application.Student.UseCases.StudentBusiness
                 return null;
 
             return _mapper.Map<StudentWithGradesDto>(student);
+        }
+
+        async Task<DbActions> IStudentBusiness.DeleteStudent(int id)
+        {
+            IEnumerable<GradesEntity> grades = await _gradesRepository.GetByStudentId(id);
+            if (grades.Any())
+                throw new BusinessException(ErrorType.EstudianteConNotas, "No se puede eliminar el estudiante porque tiene notas asociadas.");
+
+            CommonUtilities.ValidateEntityId(id, ErrorType.EstudianteNoEncontrado, "El id del estudiante es inválido.");
+
+            StudentEntity? student_db = await _studentRepository.GetById(id);
+            if (student_db is null)
+                throw new BusinessException(ErrorType.EstudianteNoEncontrado, "El estudiante no existe.");
+
+            return await _studentRepository.DeleteStudent(id);
         }
     }
 }

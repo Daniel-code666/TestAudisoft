@@ -100,5 +100,18 @@ namespace TestAudisoft.Controllers
             DbActions result = await _gradesBusiness.UpdateGrades(grades);
             return Ok(result);
         }
+
+        /// <summary>
+        /// Elimina una calificación existente a partir de su identificador. Si la calificación no existe, se devuelve una excepción controlada.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete("{id:int}")]
+        [ProducesResponseType(typeof(DbActions), StatusCodes.Status200OK)]
+        public async Task<ActionResult<DbActions>> Delete(int id)
+        {
+            DbActions result = await _gradesBusiness.DeleteGrades(id);
+            return Ok(result);
+        }
     }
 }

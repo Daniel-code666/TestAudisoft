@@ -55,7 +55,9 @@ namespace TestAudisoft.Application.Common
         private void MapGrades()
         {
             CreateMap<GradesEntity, GradeDto>()
-                .ForMember(dest => dest.GradeValue, opt => opt.MapFrom(src => src.Grade));
+                .ForMember(dest => dest.GradeValue, opt => opt.MapFrom(src => src.Grade))
+                .ForMember(dest => dest.StudentFullName, opt => opt.MapFrom(src => src.Student.FirstName + " " + src.Student.LastName))
+                .ForMember(dest => dest.ProfessorFullName, opt => opt.MapFrom(src => src.Professor.FirstName + " " + src.Professor.LastName));
 
             CreateMap<GradeCreateDto, GradesEntity>()
                 .ForMember(dest => dest.Grade, opt => opt.MapFrom(src => src.GradeValue));

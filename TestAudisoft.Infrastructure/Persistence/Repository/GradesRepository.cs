@@ -74,7 +74,7 @@ namespace TestAudisoft.Infrastructure.Persistence.Repository
         }
 
         async Task<GradesEntity?> IGradesRepository.GetById(int id)
-            => await _context.Grades.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+            => await _context.Grades.AsNoTracking().Include(x => x.Professor).Include(x => x.Student).FirstOrDefaultAsync(x => x.Id == id);
 
         async Task<GradesEntity?> IGradesRepository.GetByIdWithRelations(int id)
             => await _context.Grades.AsNoTracking().Include(x => x.Student).Include(x => x.Professor).FirstOrDefaultAsync(x => x.Id == id);
@@ -110,6 +110,16 @@ namespace TestAudisoft.Infrastructure.Persistence.Repository
             int rows_affected = await _context.SaveChangesAsync();
 
             return rows_affected > 0 ? DbActions.Updated : DbActions.NotUpdated;
+        }
+
+        async Task<DbActions> IGradesRepository.DeleteGrades(int id)
+        {
+            GradesEntity? grades_db = await _context.Grades.FirstOrDefaultAsync(x => x.Id == id);
+            if (grades_db is null)
+                return DbActions.NotFound;
+            _context.Grades.Remove(grades_db);
+            int rows_affected = await _context.SaveChangesAsync();
+            return rows_affected > 0 ? DbActions.Deleted : DbActions.NotDeleted;
         }
     }
 }

@@ -12,6 +12,8 @@
         NombreNotaRequerido = 8,
         CorreoRequerido = 9,
         NombreRequerido = 10,
-        ApellidoRequerido = 11
+        ApellidoRequerido = 11,
+        EstudianteConNotas = 12,
+        ProfesorConNotas = 13
     }
 }

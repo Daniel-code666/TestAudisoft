@@ -14,5 +14,6 @@ namespace TestAudisoft.Application.Abstractions.Persistence
         Task<IEnumerable<GradesEntity>> GetByStudentId(int student_id);
         Task<IEnumerable<GradesEntity>> GetByProfessorId(int professor_id);
         Task<GradesEntity?> GetByIdWithRelations(int id);
+        Task<DbActions> DeleteGrades(int id);
     }
 }

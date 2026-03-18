@@ -10,5 +10,7 @@ namespace TestAudisoft.Enums
         NotFound = 3,
         NotUpdated = 4,
         Updated = 5,
+        Deleted = 6,
+        NotDeleted = 7,
     }
 }

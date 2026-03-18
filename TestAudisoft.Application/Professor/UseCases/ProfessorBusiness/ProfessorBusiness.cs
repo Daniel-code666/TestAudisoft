@@ -12,13 +12,15 @@ namespace TestAudisoft.Application.Professor.UseCases.ProfessorBusiness
     {
         private readonly IProfessorRepository _professorRepository;
         private readonly ICommonRepository _commonRepository;
+        private readonly IGradesRepository _gradesRepository;
         private readonly IMapper _mapper;
 
-        public ProfessorBusiness(IMapper mapper, IProfessorRepository professorRepository, ICommonRepository commonRepository)
+        public ProfessorBusiness(IMapper mapper, IProfessorRepository professorRepository, ICommonRepository commonRepository, IGradesRepository gradesRepository)
         {
             _mapper = mapper;
             _professorRepository = professorRepository;
             _commonRepository = commonRepository;
+            _gradesRepository = gradesRepository;
         }
 
         async Task<PagedResult<ProfessorDto>> IProfessorBusiness.GetAll(StudentFilter filter)
@@ -69,5 +71,20 @@ namespace TestAudisoft.Application.Professor.UseCases.ProfessorBusiness
 
         async Task<ProfessorWithGradesDto?> IProfessorBusiness.GetProfessorWithGrades(int professor_id)
             => _mapper.Map<ProfessorWithGradesDto>(await _professorRepository.GetByIdWithGrades(professor_id));
+
+        async Task<DbActions> IProfessorBusiness.DeleteProfessor(int id)
+        {
+            IEnumerable<GradesEntity> grades = await _gradesRepository.GetByProfessorId(id);
+            if (grades.Any())
+                throw new BusinessException(ErrorType.ProfesorConNotas, "No se puede eliminar el profesor porque tiene notas asociadas.");
+
+            CommonUtilities.ValidateEntityId(id, ErrorType.ProfesorNoEncontrado, "El id del profesor es inválido.");
+
+            ProfessorEntity? professor_db = await _professorRepository.GetById(id);
+            if (professor_db is null)
+                throw new BusinessException(ErrorType.ProfesorNoEncontrado, "El profesor no existe.");
+
+            return await _professorRepository.DeleteProfessor(id);
+        }
     }
 }

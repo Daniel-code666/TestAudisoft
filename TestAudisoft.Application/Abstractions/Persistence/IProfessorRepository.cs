@@ -12,5 +12,6 @@ namespace TestAudisoft.Application.Abstractions.Persistence
         Task<ProfessorEntity?> GetById(int id);
         Task<DbActions> UpdateProfessor(ProfessorEntity professor);
         Task<ProfessorEntity?> GetByIdWithGrades(int id);
+        Task<DbActions> DeleteProfessor(int id);
     }
 }

@@ -12,5 +12,6 @@ namespace TestAudisoft.Application.Professor.UseCases.ProfessorBusiness
         Task<DbActions> CreateProfessor(ProfessorCreateDto professor);
         Task<DbActions> UpdateProfessor(ProfessorUpdateDto professor);
         Task<ProfessorWithGradesDto?> GetProfessorWithGrades(int professor_id);
+        Task<DbActions> DeleteProfessor(int id);
     }
 }

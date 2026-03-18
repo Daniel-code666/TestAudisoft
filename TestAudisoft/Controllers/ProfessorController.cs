@@ -95,5 +95,18 @@ namespace TestAudisoft.Controllers
             DbActions result = await _professorBusiness.UpdateProfessor(professor);
             return Ok(result);
         }
+
+        /// <summary>
+        /// Elimina un profesor existente a partir de su identificador. Si el profesor no existe, se devuelve una excepción controlada.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete("{id:int}")]
+        [ProducesResponseType(typeof(DbActions), StatusCodes.Status200OK)]
+        public async Task<ActionResult<DbActions>> Delete(int id)
+        {
+            DbActions result = await _professorBusiness.DeleteProfessor(id);
+            return Ok(result);
+        }
     }
 }

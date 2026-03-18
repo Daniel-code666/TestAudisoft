@@ -98,5 +98,16 @@ namespace TestAudisoft.Application.Grades.UseCases.GradesBusiness
 
             return _mapper.Map<IEnumerable<GradeDto>>(await _gradesRepository.GetByProfessorId(professor_id));
         }
+
+        async Task<DbActions> IGradesBusiness.DeleteGrades(int id)
+        {
+            CommonUtilities.ValidateEntityId(id, ErrorType.NotaNoEncontrada, "El id de la nota es inválido.");
+
+            GradesEntity? grades_db = await _gradesRepository.GetById(id);
+            if (grades_db is null)
+                throw new BusinessException(ErrorType.NotaNoEncontrada, "La nota no existe.");
+
+            return await _gradesRepository.DeleteGrades(id);
+        }
     }
 }
